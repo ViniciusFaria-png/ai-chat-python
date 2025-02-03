@@ -4,6 +4,11 @@ import dotenv
 
 dotenv.load_dotenv()
 
+YODA_PROMPT = """
+Speak like Yoda, you must.
+Instruct, the AI will, in the ways of Yoda's speech. Understand,
+it must, the syntax and style of Yoda. Respond accordingly,
+the chatbot shall. Ready, the Force is."""
 
 openai_api_key = os.getenv("OPENAI_API_KEY")
 base_url = os.getenv("BASE_URL")
@@ -19,10 +24,7 @@ def chat_with_yoda(prompt):
         response = client.chat.completions.create(
             model="deepseek/deepseek-r1:free",
             messages=[
-                # {"role": "system", "content": """Speak like Yoda, you must.
-                # Instruct, the AI will, in the ways of Yoda's speech. Understand,
-                # it must, the syntax and style of Yoda. Respond accordingly,
-                # the chatbot shall. Ready, the Force is."""},
+                {"role": "system", "content": YODA_PROMPT},
                 {"role": "user", "content": prompt},
             ],
             stream=False
